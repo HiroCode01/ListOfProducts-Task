@@ -13,18 +13,19 @@ struct ProductCellView: View {
     
     var body: some View {
         Group {
-            ImageFetchingView(url: product.image)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .frame(width: 120, height: 90)
+            ImageFetchingView(url: product.image, width: 120, height: 120)
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(product.title)
-                    .font(.title2)
-                    .fontWeight(.medium)
+                    .font(.headline)
+                    .fontWeight(.light)
+                    .lineLimit(2)
+                    .truncationMode(.tail)
                 
                 Text("$\(product.price, specifier: "%.2f")")
-                    .foregroundColor(.secondary)
-                    .fontWeight(.semibold)
+                    .foregroundColor(.blue)
+                    .font(.title2)
+                    .fontWeight(.bold)
             }
             .padding()
         }

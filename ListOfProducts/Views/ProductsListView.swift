@@ -18,19 +18,18 @@ struct ProductsListView: View {
                     HStack {
                         ProductCellView(product: product)
                     }
-                    .onTapGesture {
-                        viewModel.selectedProduct = product
-                    }
+                    .onTapGesture { viewModel.selectedProduct = product }
+                }
+                .navigationDestination(item: $viewModel.selectedProduct) { product in
+                    ProductDetailView(product: product)
                 }
                 .navigationTitle("Products")
+                .listStyle(.plain)
             }
             .task { viewModel.getProducts() }
             .alert(item: $viewModel.alertItem) { alert in
                 Alert(title: alert.title, message: alert.message, dismissButton: alert.dismissButton)
             }
-            .sheet(item: $viewModel.selectedProduct, content: { product in
-                ProductDetailView(product: product)
-            })
             
             if viewModel.isLoading {
                 ProgressView()
