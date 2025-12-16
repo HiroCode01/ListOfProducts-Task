@@ -9,15 +9,33 @@
 import SwiftUI
 
 struct ProductsListView: View {
-    var products: [Product] = MockData.sampleProducts // For testing
+    @StateObject var viewModel = ProductsListViewModel()
     
     var body: some View {
-        List(products, id: \.id) { product in
-            HStack {
-                ProductCellView(product: product)
+        ZStack {
+            NavigationStack {
+                List(viewModel.product, id: \.id) { product in
+                    HStack {
+                        ProductCellView(product: product)
+                    }
+                    .onTapGesture {
+                        viewModel.selectedProduct = product
+                    }
+                }
+                .navigationTitle("Products")
+            }
+            .task { viewModel.getProducts() }
+            .alert(item: $viewModel.alertItem) { alert in
+                Alert(title: alert.title, message: alert.message, dismissButton: alert.dismissButton)
+            }
+            .sheet(item: $viewModel.selectedProduct, content: { product in
+                ProductDetailView(product: product)
+            })
+            
+            if viewModel.isLoading {
+                ProgressView()
             }
         }
-        .navigationTitle("Products")
     }
 }
 
