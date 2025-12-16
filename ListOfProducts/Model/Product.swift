@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Products: Codable {
+struct Product: Codable {
     let id: Int
     let title: String
     let price: Double
@@ -24,12 +24,14 @@ struct Rating: Codable {
 }
 
 struct MockData {
-    static let sampleProducts = Products(id: 1,
+    static let sampleProduct = Product(id: 1,
                                          title: "Product 1",
                                          price: 10.99,
-                                         description: "Description 1",
+                                         description: "Description Description Description Description Description",
                                          category: "Category 1",
                                          image: "image1.jpg",
                                          rating: Rating(rate: 4.5,
                                                         count: 100))
+    
+    static let sampleProducts = Array(repeating: sampleProduct, count: 5)
 }
