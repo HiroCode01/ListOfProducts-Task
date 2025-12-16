@@ -14,6 +14,7 @@ struct ProductCellView: View {
     var body: some View {
         Group {
             ImageFetchingView(url: product.image, width: 120, height: 120)
+                .clipShape(.rect(cornerRadius: 10))
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(product.title)

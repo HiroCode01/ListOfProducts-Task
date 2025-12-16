@@ -19,6 +19,7 @@ struct ProductsListView: View {
                         ProductCellView(product: product)
                     }
                     .onTapGesture { viewModel.selectedProduct = product }
+                    .listRowSeparator(.hidden)
                 }
                 .navigationDestination(item: $viewModel.selectedProduct) { product in
                     ProductDetailView(product: product)

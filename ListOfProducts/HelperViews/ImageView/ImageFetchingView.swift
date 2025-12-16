@@ -19,6 +19,7 @@ struct ImageFetchingView: View {
                 image
                     .resizable()
                     .scaledToFit()
+                    .padding(5)
                     .frame(width: width, height: height)
                     .clipped()
             } else if phase.error != nil {
@@ -26,15 +27,15 @@ struct ImageFetchingView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(.gray)
+                    .padding(5)
                     .frame(width: width, height: height)
             } else {
                 ProgressView()
+                    .tint(.blue)
                     .frame(width: width, height: height)
             }
         }
-        .padding(5)
         .background(.white)
-        .clipShape(.rect(cornerRadius: 10))
     }
 }
 
